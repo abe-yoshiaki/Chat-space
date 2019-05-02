@@ -1,0 +1,161 @@
+*{
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.top-box{ 
+  background-color: $light-blue;
+  width: 100%;
+  color: $white;
+  text-align: center;
+}
+
+.chat-sub{
+  a{
+    color: $white;
+  }
+  width: 300px;
+  float: left;
+  &__sub-header{
+    background-color: $midnight;
+    height: 100px;
+    padding: 0 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    &__user-name{
+      font-size: 16px;
+      font-weight: bold;
+      color: $white;
+    }
+    &__user-menu{
+      display: flex;
+      .fa-cog{
+        padding-left: 5px;
+      }
+    }
+  }
+  &__groups{
+    background-color: $madison;
+    height: calc(100vh - 100px);
+    padding: 20px 20px 0;
+    overflow: scroll;
+    &__group{
+      margin-bottom: 40px;
+      &--name{
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      &--message{
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+.chat-main{
+  width: calc(100vw - 300px);
+  float: left;
+  &__header{
+    height: 100px;
+    padding: 0 40px;
+    display: flex;
+    border-bottom: solid 1px $whisper;
+    justify-content: space-between;
+    &__group{
+      margin-top: 35px;
+      &--name{
+        font-size: 20px;
+        color: $night-rider;
+      }
+      &__member-list{
+        margin-top: 15px;
+        display: flex;
+        font-size: 12px;
+        color: $nobel;
+      }
+    }
+    &__edit-btn{
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      margin-top: 28px;
+      border: solid 1px $light-blue;
+      color: $light-blue;
+    }
+  }
+  &__messages{
+    background-color: $snow;
+    height: calc(100vh - 190px);
+    padding: 46px 40px;
+    overflow: scroll;
+    &__message{
+      padding-bottom: 40px;
+      &__upper-info{
+        display: flex;
+        margin-bottom: 10px;
+        &--user{
+          color: $rhino;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &--date{
+          color: $nobel;
+          font-size: 12px;
+          margin-left: 10px;
+        }
+      }
+      &__message-text{
+        color: $rhino;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  &__form{
+    background-color: $gainsboro;
+    height: 90px;
+    padding: 20px 40px;
+    &__new-message{
+      display: flex;
+      &__input-box{
+        width: 100%;
+        position: relative;
+        &--text{
+          height: 50px;
+          width: 100%;
+          padding: 0 40px 0 10px;
+          color: $rhino;
+          border-style: none;
+        }
+        &--image-label{
+          font-size: 1.3rem;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+          &--input{
+            display: none;
+          }
+        }
+      }
+      &__submit-btn{
+        width: 100px;
+        height: 50px;
+        padding: 0 30px;
+        margin-left: 15px;
+        background-color: $light-blue;
+        color: $white;
+        cursor: pointer;
+      }
+    }
+  }
+}
