@@ -90,6 +90,9 @@ body{
       margin-top: 28px;
       border: solid 1px $light-blue;
       color: $light-blue;
+      &__inside{
+        color: $light-blue;
+      }
     }
   }
   &__messages{
