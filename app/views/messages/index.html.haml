@@ -1,41 +1,43 @@
-.top-box
-  グループを作成しました
-  %div
+%div
 .chat-sub
   .chat-sub__sub-header
-    %p.chat-sub__sub-header__user-name sample
+    %p.chat-sub__sub-header__user-name 
+      =current_user.name
     %ul.chat-sub__sub-header__user-menu
       %li.chat-sub__sub-header__user-menu__edit-user
-        %a{:href => ""}
-          %i.fa.fa-edit
+        = link_to new_group_path do
+          = fa_icon 'pencil-square-o', class: 'icon'
       %li.chat-sub__sub-header__user-menu__new-group
-        %a{:href => ""}
-          %i.fa.fa-cog
+        = link_to edit_user_path(current_user) do
+          = fa_icon 'cog', class: 'fa fa-cog'
   .chat-sub__groups
-    %a{:href => ""}
-      .chat-sub__groups__group
-        %p.chat-sub__groups__group--name sample
-        %p.chat-sub__groups__group--message まだメッセージがありません
+    - current_user.groups.each do |group|
+      = link_to group_messages_path(group) do
+        .chat-sub__groups__group
+          %p.chat-sub__groups__group--name
+            = group.name
+          %p.chat-sub__groups__group--message 
+            = group.show_last_message 
 .chat-main
   .chat-main__header
     .chat-main__header__group
       %h2.chat-main__header__group--name sample
       %ul.chat-main__header__group__member-list
         Member:
-        %li.chat-main__header__group__member-list__member sample
-    %a{:href => ""}
-      .chat-main__header__edit-btn Edit
+        %li.chat-main__header__group__member-list__member
+          -@group.users.each do |user|
+            = user.name
+    .chat-main__header__edit-btn
+      = link_to "Edit", edit_group_path(@group), class: 'chat-main__header__edit-btn__inside'
   .chat-main__messages
-    .chat-main__messages__message
-      .chat-main__messages__message__upper-info
-        %p.chat-main__messages__message__upper-info--user sampleuser
-        %p.chat-main__messages__message__upper-info--date 2019/05/01(Wed) 15:30:12
-      %p.chat-main__messages__message__message-text メッセージの表示箇所
+    = render partial: 'message', collection: @messages
   .chat-main__form
-    %form.chat-main__form__new-message{:method => "post"}
+    .chat-main__form__new-message
       .chat-main__form__new-message__input-box
-        %input.chat-main__form__new-message__input-box--text{:name => "message[content]", :placeholder => "type a message", :type => "text"}/
-        %label.chat-main__form__new-message__input-box--image-label{:for => "message_image"}
-          %i.fa.fa-image
-          %input#message_image.chat-main__form__new-message__input-box--image-label--input{:name => "message[image]", :type => "file"}/
-      %input.chat-main__form__new-message__submit-btn{:name => "commit", :type => "submit", :value => "Send"}/
+        = form_for [@group, @message] do |f|
+          = f.text_field :content, class: 'chat-main__form__new-message__input-box--text', placeholder: 'type a message'
+          .chat-main__form__message--file
+            = f.label :image, class: 'chat-main__form__new-message__input-box--image-label' do
+              = fa_icon 'picture-o', class: 'fa fa-image'
+              = f.file_field :image, class: 'chat-main__form__new-message__input-box--image-label--input'
+          = f.submit 'Send', class: 'chat-main__form__new-message__submit-btn'
