@@ -90,6 +90,9 @@ body{
       margin-top: 28px;
       border: solid 1px $light-blue;
       color: $light-blue;
+      &__inside{
+        color: $light-blue;
+      }
     }
   }
   &__messages{
@@ -125,7 +128,6 @@ body{
     height: 90px;
     padding: 20px 40px;
     &__new-message{
-      display: flex;
       &__input-box{
         width: 100%;
         position: relative;
@@ -140,7 +142,7 @@ body{
           font-size: 1.3rem;
           position: absolute;
           top: 10px;
-          right: 10px;
+          right: 125px;
           cursor: pointer;
           &--input{
             display: none;
@@ -158,4 +160,8 @@ body{
       }
     }
   }
+}
+
+.new_message{
+  display:flex;
 }
