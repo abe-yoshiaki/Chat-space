@@ -50,8 +50,8 @@ $(function() {
   });
 
   $(document).on("click", '.user-search-add', function() {
-    var name = $(this).data("data-user-name");
-    var user_id = $(this).data("data-user-id");
+    var name = $(this).data("user-name");
+    var user_id = $(this).data("user-id");
     $(this).parent().remove();
     appendMembers(name, user_id);
   });
