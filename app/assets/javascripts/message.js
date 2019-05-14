@@ -31,7 +31,6 @@ $(function () {
       processData: false,
       contentType: false,
     })
-
     .done(function (data) {
       var html = buildHTML(data);
       $('.chat-main__messages').append(html);
@@ -43,4 +42,30 @@ $(function () {
     })
     return false;
   })
+
+  var timer = setInterval(function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)) {
+      last_message_id = $('.chat-main__messages__message:last').data('id');
+      $.ajax({
+        url: location.href,
+        type: 'get',
+        dataType: 'json',
+        data: {id: last_message_id}
+      })
+      .done(function(data) {
+        $.each(data, function(i, message) {
+          var html = buildHTML(message);
+          $('.chat-main__messages').append(html);
+        })
+        $('.chat-main__messages').animate({ scrollTop: $(".chat-main__messages")[0].scrollHeight }, 900);
+      })
+      .fail(function(data) {
+        alert("メッセージの自動更新ができませんでした");
+      });
+    }
+  },5000);
+
+  $(this).on('turbolinks:click', function() {
+    clearInterval(timer);
+  });
 })
